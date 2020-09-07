@@ -17,9 +17,9 @@ var DB *sql.DB
 
 // TrainResource is the model for holding rail information
 type TrainResource struct {
-	ID              int
-	DriverName      string
-	OperatingStatus bool
+	ID              int    `json:"id"`
+	DriverName      string `json:"driverName"`
+	OperatingStatus bool   `json:"operatingStatus"`
 }
 
 // StationResource holds information about locations
@@ -36,6 +36,23 @@ type ScheduleResource struct {
 	TrainID     int
 	StationID   int
 	ArrivalTime time.Time
+}
+
+// GetTrain returns the train detail
+func GetTrain(c *gin.Context) {
+	var train TrainResource
+	id := c.Param("train_id")
+	err := DB.QueryRow("select ID, DRIVER_NAME, OPERATING_STATUS from train where id=?", id).Scan(&train.ID, &train.DriverName, &train.OperatingStatus)
+	if err != nil {
+		log.Println(err)
+		c.JSON(500, gin.H{
+			"error": err.Error(),
+		})
+	} else {
+		c.JSON(200, gin.H{
+			"result": train,
+		})
+	}
 }
 
 // GetStation returns the station detail
@@ -103,5 +120,6 @@ func main() {
 	r.GET("/v1/stations/:station_id", GetStation)
 	r.POST("/v1/stations", CreateStation)
 	r.DELETE("/v1/stations/:station_id", RemoveStation)
+	r.GET("/v1/trains/:train_id", GetTrain)
 	r.Run(":8000") // listen and serve on 0.0.0.0:8000
 }
