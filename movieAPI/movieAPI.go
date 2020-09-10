@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"gopkg.in/mgo.v2"
+	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -63,6 +63,37 @@ func (db *DB) PostMovie(w http.ResponseWriter, r *http.Request) {
 		w.Write(response)
 	}
 }
+
+// UpdateMovie modifies the data of given resource
+func (db *DB) UpdateMovie(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	var movie Movie
+	putBody, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(putBody, &movie)
+	// Create an Hash ID to insert
+	err := db.collection.Update(bson.M{"_id": bson.ObjectIdHex(vars["id"])}, bson.M{"$set": &movie})
+	if err != nil {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(err.Error()))
+	} else {
+		w.Header().Set("Content-Type", "text")
+		w.Write([]byte("Updated succesfully!"))
+	}
+}
+
+// DeleteMovie removes the data from the db
+func (db *DB) DeleteMovie(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	// Create an Hash ID to insert
+	err := db.collection.Remove(bson.M{"_id": bson.ObjectIdHex(vars["id"])})
+	if err != nil {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(err.Error()))
+	} else {
+		w.Header().Set("Content-Type", "text")
+		w.Write([]byte("Deleted succesfully!"))
+	}
+}
 func main() {
 	session, err := mgo.Dial("127.0.0.1")
 	c := session.DB("appdb").C("movies")
@@ -76,6 +107,8 @@ func main() {
 	// Attach an elegant path with handler
 	r.HandleFunc("/v1/movies/{id:[a-zA-z0-9]*}", db.GetMovie).Methods("GET")
 	r.HandleFunc("/v1/movies/", db.PostMovie).Methods("POST")
+	r.HandleFunc("v1/movies/{id:[a-zA-z0-9]*}", db.UpdateMovie).Methods("PUT")
+	r.HandleFunc("v1/movies/{id:[a-zA-z0-9]*}", db.DeleteMovie).Methods("DELETE")
 	srv := &http.Server{
 		Handler: r,
 		Addr:    "127.0.0.1:8000",
