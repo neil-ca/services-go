@@ -1,0 +1,118 @@
+- Product
+- Customer/user
+- Category
+- Order
+- 
+Product:
+{
+_id: ObjectId("59603d3b0f41ead96110cf4f"),
+sku: 1022,
+slug: "highlander-shirt-223",
+name: "Highlander casual shirt",
+description: "A nice looking casual shirt for men",
+details: {
+model_number: 235476,
+manufacturer: "HighLander",
+color: "light blue",
+mfg_date: new Date(2017, 4, 8),
+size: 40
+},
+reviews: 3,
+pricing: {
+cost: 23,
+retail: 29
+},
+categories: {
+ObjectId("3d3b10f41efad96g110vcf4f"),
+ObjectId("603d3eb0ft41ead96110cf4f")
+},
+tags: ["shirts", "men", "clothing"],
+reviews: {
+ObjectId("3bd310f41efad96g110vcf4f"),
+ObjectId("f4e603d3eb0ft41ead96110c"),
+ObjectId("96g3bd310f41efad110vcf4g")
+}
+}
+Category:
+{
+_id: ObjectId("6d3b56900f41ead96110cf4f"),
+name: "Casual Shirts",
+description: "All casual shirts for men",
+slug: "casual-shirts",
+parent_categories: [{
+slug: "home"
+name: "Home",
+_id: ObjectId("3d3b10f41efad96g110vcf4f"),
+},
+{
+slug: "shirts"
+name: "Shirts",
+_id: ObjectId("603d3eb0ft41ead96110cf4f"),
+}]
+}
+User:
+{
+_id: ObjectId("4fcf3eb0ft41ead96110"),
+username: "John",
+email_address: "john.p@gmail.com",
+password: "5kj64k56hdfjkhdfkgdf98g79df7g9dfg",
+first_name: "John",
+last_name: "Pauling",
+address_multiple: [{
+type: "home"
+street: "601 Sherwood Ave",
+city: "San Bernardino",
+state: "California",
+pincode: 94565
+},
+{
+type: "work"
+street: "241 Indian Spring St",
+city: "Pittsburg",
+state: "California",
+pincode: 94565
+}] ,
+payments: {
+name: "Paypal",
+auth: {
+    token: "dfghjvbsclka76asdadn89"
+    }
+    }
+    }
+    Order:
+    {
+    _id: ObjectId(),
+    user: ObjectId("4fcf3eb0ft41ead96110"),
+    state: "cart",
+    item_queue: [{
+    item: ObjectId("59603d3b0f41ead96110cf4f"),
+    quantity: 1,
+    cost: 23
+    }],
+    shipping_address: {
+    type: "work"
+    street: "241 Indian Spring St",
+    city: "Pittsburg",
+    state: "California",
+    pincode: 94565
+    },
+    total: 23,
+    }
+    Review:
+    {
+    _id: ObjectId("5tcf3eb0ft41ead96110"),
+    product: ObjectId("4fcf3eb0ft41ead96110"),
+    posted_date: new Date(2017, 2, 6),
+    title: "Overall satisfied with product",
+    body: "The product is good and durable. After dry wash, the color hasn't
+    changed much",
+    user: ObjectId(),
+    rating: 4,
+    upvotes: 3,
+    downvotes: 0,
+    upvoters: [ObjectId("41ea5tcf3eb0ftd9233476hg"),
+    ObjectId("507f1f77bcf86cd799439011"),
+    ObjectId("54f113fffba522406c9cc20f")
+    ],
+    downvoters: []
+    }
