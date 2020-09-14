@@ -34,3 +34,18 @@ http://localhost:8000/v1/movies/5958be2a057d926f089a9700 \
 -H 'cache-control: no-cache' \
 -H 'postman-token: 00282916-e7f8-5977-ea34-d8f89aeb43e2'
 ```
+
+## Urlshortener
+```
+curl -X POST \
+http://localhost:8000/v1/short \
+-H 'cache-control: no-cache' \
+-H 'content-type: application/json' \
+-d '{
+"url":
+"https://www.forbes.com/forbes/welcome/?toURL=https://www.forbes.com/sites/
+karstenstrauss/2017/04/20/the-highest-paying-jobs-in-techin-
+2017/&refURL=https://www.google.co.in/&referrer=https://www.google.co.in
+/"
+}'
+```
