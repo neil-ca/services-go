@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Neil-Uli/Algorithms/algorithms/base62"
-	"github.com/Neil-Uli/rest/urlshortener/models"
+	"github.com/Neil-Uli/Restful-go/urlshortener/models"
+	base62 "github.com/Neil-Uli/Restful-go/urlshortener/utils"
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
 )
