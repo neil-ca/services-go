@@ -1,51 +1,38 @@
 # Restful-go
+## This repo is a collection of services written in go 
+## One example inside of jsonstore 
+| Endpoint                 | Method  | Description |
+| :----------------------: | :----: | :-----: |
+| /v1/user/id              | Get  | Get a user using ID |
+| /v1/user                 | Post | Create a new user |
+| /v1/user?first_name=NAME | Get  | Get all users by the given first name|
+| /v1/order/id             | Get  | Get an order with the given ID |
+| /v1/order                | Post | Create a new order |
 
-| HTTP verb |                 Path                 | Action | Resource |
-| :-------- | :----------------------------------: | -----: | -------- |
-| POST      |   /v1/train(details as JSON body)    | Create | Train    |
-| POST      |  /v1/station(details as JSON body)   | Create | Station  |
-| GET       |             /v1/train/id             |   Read | Train    |
-| GET       |            /v1/station/id            |   Read | Station  |
-| POST      | /v1/schedule(source and destination) | Create | Route    |
-
-
-| HTTP verb |               Path               | Action | Resource |
-| :-------- | :------------------------------: | -----: | -------- |
-| POST      | /v1/movies(details as JSON body) | Create | Movie    |
-| GET       |          /v1/movies/id           |    Get | Movie    |
-
-## Create resource
+##Create resource
 ```
 curl -X POST \
-http://localhost:8000/v1/movies \
+http://localhost:8000/v1/user \
 -H 'cache-control: no-cache' \
 -H 'content-type: application/json' \
--H 'postman-token: 6ef9507e-65b3-c3dd-4748-3a2a3e055c9c' \
--d '{ "name" : "The Dark Knight", "year" : "2008", "directors" : [
-"Christopher Nolan" ], "writers" : [ "Jonathan Nolan", "Christopher Nolan"
-], "boxOffice" : { "budget" : 185000000, "gross" : 533316061 }
+-d '{
+"username": "neil",
+"email_address": "ulicode4@gmail.com",
+"first_name": "Neil",
+"last_name": "Ulises"
 }'
 ```
 
 ## Obtain resource
 ```
-curl -X GET \
-http://localhost:8000/v1/movies/5958be2a057d926f089a9700 \
--H 'cache-control: no-cache' \
--H 'postman-token: 00282916-e7f8-5977-ea34-d8f89aeb43e2'
+curl -X GET http://localhost:8000/v1/user/1
 ```
-
-## Urlshortener
+## It returns all the details about the user
+``` 
+{"user":{"ID":1,"CreatedAt":"2020-09-16T13:05:37.01959-05:00",
+"UpdatedAt":"2020-09-16T13:05:37.01959-05:00","DeletedAt":null,"Orders":null},
+"data":{"email_address":"ulicode4@gmail.com","first_name":"Christopher Marshal","last_name":"ulises","username":"neil"}}
 ```
-curl -X POST \
-http://localhost:8000/v1/short \
--H 'cache-control: no-cache' \
--H 'content-type: application/json' \
--d '{
-"url":
-"https://www.forbes.com/forbes/welcome/?toURL=https://www.forbes.com/sites/
-karstenstrauss/2017/04/20/the-highest-paying-jobs-in-techin-
-2017/&refURL=https://www.google.co.in/&referrer=https://www.google.co.in
-/"
-}'
+```
+curl -X GET 'http://localhost:8000/v1/user?first_name=Christopher Marshal'
 ```
