@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Neil-Uli/rest/railAPI/dbutils"
+	"github.com/Neil-Uli/Restful-go/railAPI/dbutils"
 	"github.com/gin-gonic/gin"
 
 	_ "github.com/mattn/go-sqlite3"

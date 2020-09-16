@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	pb "github.com/Neil-Uli/rest/protofiles"
+	pb "github.com/Neil-Uli/Restful-go/protofiles"
 	"github.com/golang/protobuf/proto"
 )
 

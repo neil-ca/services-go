@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	pb "github.com/Neil-Uli/rest/grpc-example/datafiles"
+	pb "github.com/Neil-uli/Restful-go/grpc-example/datafiles"
 	"google.golang.org/grpc"
 )
 
