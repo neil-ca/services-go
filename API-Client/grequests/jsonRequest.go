@@ -7,9 +7,10 @@ import (
 
 func main() {
 	resp, err := grequests.Get("http://httpbin.org/get", nil)
-	// You can modify the request by passing an optional RequestOptions struct
 	if err != nil {
 		log.Fatalln("Unable to make request: ", err)
 	}
-	log.Println(resp.String())
+	var returnData map[string]interface{}
+	resp.JSON(&returnData)
+	log.Println(returnData)
 }
