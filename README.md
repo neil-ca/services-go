@@ -1,6 +1,7 @@
 # Restful-go
 ## This repo is a collection of services written in go 
 ## One example inside of jsonstore 
+
 | Endpoint                 | Method  | Description |
 | :----------------------: | :----: | :-----: |
 | /v1/user/id              | Get  | Get a user using ID |
@@ -9,7 +10,7 @@
 | /v1/order/id             | Get  | Get an order with the given ID |
 | /v1/order                | Post | Create a new order |
 
-##Create resource
+## Create resource
 ```
 curl -X POST \
 http://localhost:8000/v1/user \
