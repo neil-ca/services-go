@@ -11,7 +11,7 @@ type EncryptService interface {
 // MakeEncryptEndpoint forms endpoint for request/response of encrypt function
 func MakeEncryptEndpoint(svc EncryptService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		req := request.(EncryptService)
+		req := request.(EncryptRequest)
 		message, err := svc.Encrypt(ctx, req.Key, req.Text)
 		if err != nil {
 			return EncryptResponse{message, err.Error()}, nil

@@ -12,8 +12,9 @@ import (
 type EncryptServiceInstance struct{}
 // Implements AES encryption algorithm(Rijndael Algorithm)
 var initVector = []byte{35, 46, 57, 24, 85, 35, 24, 74, 87, 35, 88, 98, 66, 32, 14, 05}
+
 // Encrypt encrypts the string with given key
-func (EncryptServiceInsatnce) Encrypt(_ context.Context, key string, text string) (string, error) {
+func (EncryptServiceInstance) Encrypt(_ context.Context, key string, text string) (string, error) {
 	block, err := aes.NewCipher([]byte(key))
 	if err != nil {
 		panic(err)
