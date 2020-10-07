@@ -90,17 +90,30 @@ func UpdateCustomer(customer Customer) {
 	defer database.Close()
 }
 
+// DeleteCustomer method with parameter customer
+func DeleteCustomer(customer Customer) {
+	var database *sql.DB
+	database = GetConnection()
+	var error error
+	var delete *sql.Stmt
+	delete, error = database.Prepare("DELETE FROM customer WHERE CustomerId=?")
+	if error != nil {
+		panic(error.Error())
+	}
+	delete.Exec(customer.CustomerId)
+	defer database.Close()
+}
 func main() {
 	var customers []Customer
 	customers = GetCustomers()
-	fmt.Println("Before Update", customers)
+	fmt.Println("Before Delete", customers)
 	var customer Customer
 	customer.CustomerName = "George Thompson"
 	customer.SSN = "5415151321"
 	customer.CustomerId = 1
-	UpdateCustomer(customer)
+	DeleteCustomer(customer)
 	customers = GetCustomers()
-	fmt.Println("Customers After update", customers)
+	fmt.Println("Customers After delete", customers)
 }
 
 /*
