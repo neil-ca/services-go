@@ -75,16 +75,32 @@ func InsertCustomer(customer Customer) {
 	insert.Exec(customer.CustomerName, customer.SSN)
 	defer database.Close()
 }
+
+// UpdateCustomer method with parameter customer
+func UpdateCustomer(customer Customer) {
+	var database *sql.DB
+	database = GetConnection()
+	var error error
+	var update *sql.Stmt
+	update, error = database.Prepare("UPDATE customer SET CustomerName=?, ssn=? WHERE CustomerId=?")
+	if error != nil {
+		panic(error.Error())
+	}
+	update.Exec(customer.CustomerName, customer.SSN, customer.CustomerId)
+	defer database.Close()
+}
+
 func main() {
 	var customers []Customer
 	customers = GetCustomers()
-	fmt.Println("Before Insert", customers)
+	fmt.Println("Before Update", customers)
 	var customer Customer
-	customer.CustomerName = "Richard Stallman"
-	customer.SSN = "5415475"
-	InsertCustomer(customer)
+	customer.CustomerName = "George Thompson"
+	customer.SSN = "5415151321"
+	customer.CustomerId = 1
+	UpdateCustomer(customer)
 	customers = GetCustomers()
-	fmt.Println("Customers After insert", customers)
+	fmt.Println("Customers After update", customers)
 }
 
 /*
