@@ -12,6 +12,8 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	template_html = template.Must(template.ParseFiles("main.html"))
 	template_html.Execute(w, nil)
 }
+
+// Create - execute template
 func main() {
 	log.Println("Server running on -> http://localhost:8000")
 	http.HandleFunc("/", Home)
