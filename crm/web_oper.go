@@ -6,11 +6,14 @@ import (
 	"text/template"
 )
 
-// Home method renders the main.html
+var template_html = template.Must(template.ParseGlob("templates/*"))
+
+// Home - execute Template
 func Home(w http.ResponseWriter, r *http.Request) {
-	var template_html *template.Template
-	template_html = template.Must(template.ParseFiles("main.html"))
-	template_html.Execute(w, nil)
+	var customers []Customer
+	customers = GetCustomers()
+	log.Println(customers)
+	template_html.ExecuteTemplate(w, "Home", customers)
 }
 
 // Create - execute template
