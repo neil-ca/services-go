@@ -61,3 +61,16 @@ func (db Database) DeleteItem(itemId int) error {
 		return err
 	}
 }
+
+func (db Database) UpdateItem(itemId int, itemData models.Item) (models.Item, error) {
+	item := models.Item{}
+	query := `UPDATE items SET name=$1, description=$2 WHERE id=$3 RETURNING  id, name, description, created_at;`
+	err := db.Conn.QueryRow(query, itemData.Name, itemData.Description, itemId).Scan(&item.ID, &item.Name, &item.Description, &item.CreatedAt)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return item, ErrNoMatch
+		}
+		return item, err
+	}
+	return item, nil
+}
