@@ -49,3 +49,15 @@ func (db Database) GetItemById(itemId int) (models.Item, error) {
 		return item, err
 	}
 }
+
+func (db Database) DeleteItem(itemId int) error {
+	query := `DELETE FROM items WHERE id = $1;`
+	_, err := db.Conn.Exec(query, itemId)
+	switch err {
+	case sql.ErrNoRows:
+		return ErrNoMatch
+
+	default:
+		return err
+	}
+}
