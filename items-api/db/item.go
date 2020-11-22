@@ -1,6 +1,8 @@
 package db
 
 import (
+	"database/sql"
+
 	"github.com/Neil-Uli/Restful-go/items-api/models"
 )
 
@@ -35,4 +37,15 @@ func (db Database) AddItem(item *models.Item) error {
 	item.ID = id
 	item.CreatedAt = createdAt
 	return nil
+}
+func (db Database) GetItemById(itemId int) (models.Item, error) {
+	item := models.Item{}
+	query := `SELECT * FROM items WHERE id = $1;`
+	row := db.Conn.QueryRow(query, itemId)
+	switch err := row.Scan(&item.ID, &item.Name, &item.Description, &item.CreatedAt); err {
+	case sql.ErrNoRows:
+		return item, ErrNoMatch
+	default:
+		return item, err
+	}
 }
