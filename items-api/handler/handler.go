@@ -5,6 +5,7 @@ import (
 
 	"github.com/Neil-uli/Resful-go/items-api/db"
 	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/render"
 )
 
 var dbInstance db.Database
