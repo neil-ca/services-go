@@ -13,6 +13,9 @@ type App struct {
 	DB     *sql.DB
 }
 
-func main() {
+// Initialize will take in the details required to connect to the database It will create
+// a database connection and wire up the routes to respond according to the requirements
+func (a *App) Initialize(user, password, dbname string) {}
 
-}
+// Run method will simply start the application
+func (a *App) Run(addr string) {}
