@@ -5,5 +5,12 @@
 - export DB_PASSWORD=
 - export DB_NAME=postgres
 
-( ͡° ͜ʖ ͡°)
-( ͡⊙ ͜ʖ ͡⊙)
+## Build up docker compose ( ͡° ͜ʖ ͡°)
+```sh
+docker-compose up
+```
+## For test main function ( ͡⊙ ͜ʖ ͡⊙)
+```go
+go test -v
+```
+
