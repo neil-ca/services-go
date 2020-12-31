@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/Neil-Uli/Restful-go/grpc-example/datafiles"
+	pb "github.com/Neil-uli/Restful-go/grpc-example/datafiles"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
