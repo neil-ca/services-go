@@ -4,13 +4,19 @@ metadata:
   name: minimal-ingress
   annotations:
     nginx.ingress.kubernates.io/rewrite-target: /
+    kubernates.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
+  tls:
+  - hosts:
+    - test.ulicode.com
+    secretName: api-tls
   rules:
-    #  - host: 
-  - http:
-      paths:
-        - path: /*
-          backend:
-            serviceName: go-api
-            servicePort: 8080
+  - host: test.ulicode.com
+    http:
+       paths:
+      # - path: /*
+       - backend:
+          serviceName: go-api
+          servicePort: 8080
 
