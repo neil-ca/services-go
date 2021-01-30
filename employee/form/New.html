@@ -1,11 +1,13 @@
 {{ define "New" }}
   {{ template "Header" }}
     {{ template "Menu" }} 
-   <h2>New Name and City</h2>  
+   <h2>Create a new employee</h2>  
+   <div class="form">
     <form method="POST" action="insert">
       <label> Name </label><input type="text" name="name" /><br />
       <label> City </label><input type="text" name="city" /><br />
       <input type="submit" value="Save user" />
     </form>
+    </div>
   {{ template "Footer" }}
 {{ end }}

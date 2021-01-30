@@ -1,8 +1,35 @@
+body {
+    background-color: darkkhaki;
+}
 h1 {
     color: darkred;
-    background-color: antiquewhite;
     text-align: center;
 }
 h2 {
     color: brown;
+    text-align: center;
+}
+.center-block {
+    margin-left: 50% ;
+}
+a:hover {
+    color:red;
+}
+table, th, td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+td {
+    background-color: antiquewhite;
+}
+.center {
+    margin: auto auto; 
+}
+.form { 
+    margin: 0 auto;
+    max-width: 300px;
+}
+input {
+    margin-bottom: 8px;
 }
