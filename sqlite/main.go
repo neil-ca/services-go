@@ -79,6 +79,9 @@ func main() {
 	{
 		v1.POST("/book", PostBook)
 		v1.GET("/books", GetBooks)
+		v1.GET("/book/:id", GetBook)
+		v1.DELETE("/book/:id", DeleteBook)
+		v1.PUT("/book/:id", UpdateBook)
 	}
 	r.Run(":8080")
 }
@@ -129,6 +132,58 @@ func GetBook(c *gin.Context) {
 	if book.ID != 0 {
 		c.JSON(200, book)
 	} else {
-		c.JSON(404, "Book not found")
+		c.JSON(404, gin.H{"error": "Book not found"})
 	}
+}
+
+func DeleteBook(c *gin.Context) {
+	db := InitDb()
+	defer db.Close()
+	// Param is a simple shorcut of Params.ByName("id")
+	id := c.Param("id")
+	var book Book
+
+	db.First(&book, id)
+
+	// 204 is recomended if nothing is returned
+	//c.JSON(204, book)
+
+	if book.ID != 0 {
+		db.Delete(&book)
+		c.JSON(200, gin.H{"success": "Book #" + id + " deleted"})
+	} else {
+		c.JSON(404, gin.H{"error": "Book not found"})
+	}
+	// curl -i -X DELETE http://localhost:8080/api/v1/book/1
+}
+func UpdateBook(c *gin.Context) {
+	db := InitDb()
+	defer db.Close()
+
+	id := c.Param("id")
+	var book Book
+
+	db.First(&book, id)
+
+	if book.Name != "" && book.Author != "" {
+		if book.ID != 0 {
+			var newBook Book
+			c.Bind(&newBook)
+
+			result := Book{
+				ID:     book.ID,
+				Name:   newBook.Name,
+				Author: newBook.Author,
+			}
+			// UPDATE books SET name='newBook.name', author='newBook.author' WHERE id = book.ID;
+			db.Save(&result)
+			// Display modified data in JSON message "success"
+			c.JSON(200, gin.H{"success": result})
+		} else {
+			c.JSON(404, "Book not found")
+		}
+	} else {
+		c.JSON(422, "Fields are empty")
+	}
+	// curl -i -X PUT -H "Content-Type: application/json" -d "{ \"name\": \"Un mundo feliz\", \"Author\": \"Aldous Huxley\" }" http://localhost:8080/api/v1/book/1
 }
