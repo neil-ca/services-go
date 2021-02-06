@@ -1,6 +1,7 @@
 package api
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 )
@@ -25,7 +26,14 @@ func InitDb() *gorm.DB {
 
 func Handlers() *gin.Engine {
 	r := gin.Default()
-	r.Use(Cors())
+
+	// r.Use(Cors())
+	config := cors.DefaultConfig()
+	config.AllowAllOrigins = true
+	// config.AllowOrigins = []string{"http://google.com", "http://localhost"}
+	// config.AllowOrigins == []string{"http://google.com", "http://facebook.com"}
+
+	r.Use(cors.New(config))
 	v1 := r.Group("api/v1/books")
 	{
 		v1.POST("", PostBook)
@@ -45,4 +53,10 @@ func Cors() gin.HandlerFunc {
 		c.Writer.Header().Add("Access-Control-Allow-Origin", "*")
 		c.Next()
 	}
+}
+
+func OptionsBook(c *gin.Context) {
+	c.Writer.Header().Set("Access-Control-Allow-Methods", "DELETE, POST, PUT, OPTIONS")
+	c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	c.Next()
 }

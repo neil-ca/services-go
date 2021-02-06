@@ -113,9 +113,3 @@ func UpdateBook(c *gin.Context) {
 	}
 	// curl -i -X PUT -H "Content-Type: application/json" -d "{ \"name\": \"Un mundo feliz\", \"Author\": \"Aldous Huxley\" }" http://localhost:8080/api/v1/book/1
 }
-
-func OptionsBook(c *gin.Context) {
-	c.Writer.Header().Set("Access-Control-Allow-Methods", "DELETE, POST, PUT")
-	c.Writer.Header().Set("Access-Control-Allow-Header", "Content-Type")
-	c.Next()
-}

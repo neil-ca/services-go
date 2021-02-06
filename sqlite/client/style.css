@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Potta+One&display=swap');
+html,
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #eaf2e3;
+    font: 12px Monospace;
+}
+.container {
+    display: grid;
+    grid-template-columns: 30vw, min-content;
+    grid-template-rows: 1fr;
+    grid-gap: 1rem;
+    background-color: #f3ffbd;
+    border: 8px inset #ccd5ae;
+    /* border-radius: 18px; */
+    margin: 0 15px;
+}
+
+nav {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10vh;
+    background: linear-gradient(to bottom, #393d3f 65%, #c6c5b9 35%);
+    color: #fefae0;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+}
+nav > div {
+    margin-left: 1rem;
+    font-family: 'Potta One', cursive;
+    text-shadow: 6px 7px 2px #010100;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    color: #f3ffbd;
+}
+
+table {
+    border: 3.5px solid #A40808;
+    background-color: #EEE7DB;
+    width: 100%;
+    border-collapse:collapse ;
+    /* display: inline-block; overflow: auto; */
+    position: relative;
+    left: 20px;
+    top: 20px;
+    margin-bottom: 2rem;
+}
+td, th {
+    border: 1px solid black;
+    padding: 0.5rem;
+    text-align: right; 
+}
+tr:hover {background-color: #f5f5f5;}
+
+.operations {
+    margin: 45px;
+    width: 65%;
+    height: max-content;
+    background-color: #c6c5b9;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+.operations > form{
+    margin: 10px;
+    text-align: center;
+}
+input {
+    margin-bottom: 15px;
+}
+
