@@ -21,7 +21,7 @@ nav {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 10vh;
-    background: linear-gradient(to bottom, #393d3f 65%, #c6c5b9 35%);
+    background: linear-gradient(to bottom, #1d373f 65%, #ffec20 35%);
     color: #fefae0;
     margin-bottom: 1rem;
     font-size: 3rem;
@@ -29,11 +29,11 @@ nav {
 nav > div {
     margin-left: 1rem;
     font-family: 'Potta One', cursive;
-    text-shadow: 6px 7px 2px #010100;
+    text-shadow: 4px 7px 2px #010100;
     display: flex;
     justify-content: left;
     align-items: center;
-    color: #f3ffbd;
+    color: #f1f1f1;
 }
 
 table {

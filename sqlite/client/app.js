@@ -33,10 +33,15 @@ function generateTable(table, data) {
     }
 }
 
-const myForm = document.getElementById('form')
-myForm.addEventListener('submit', async (e) => {
+// Operations with books
+let resetForm = () => {
+    let reset = document.getElementById('form')
+    reset.reset()
+}
+const createBook = document.getElementById('form')
+createBook.addEventListener('submit', async (e) => {
     e.preventDefault()
-    const formData = new FormData(myForm)
+    const formData = new FormData(createBook)
     // console.log(formData); -> FormData { }
     const jsonObj = Object.fromEntries(formData) // method transforms a list of key-value pairs into an object
     // console.log(jsonObj); -> Object {name: "awa", author: "awsd"}
@@ -50,7 +55,51 @@ myForm.addEventListener('submit', async (e) => {
         })
         const json = await response.json();
         console.log(json);
-        myForm.reset()
+        resetForm()
+        window.location.reload()
+    } catch (e) {
+        console.error(e);
+    }
+})
+const deleteBook = document.getElementById('delete-btn')
+deleteBook.addEventListener('click', async (e) => {
+    e.preventDefault()
+    let idBook = document.getElementById('id').value
+    let id = parseInt(idBook)
+    try {
+        const res = await fetch(`http://localhost:8080/api/v1/books/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        })
+        const json = await res.json()
+        console.log(json);
+        resetForm()
+        window.location.reload()
+    } catch (e) {
+        console.error(e)
+    }
+})
+const updateBook = document.getElementById('update-btn')
+updateBook.addEventListener('click', async (e) => {
+    e.preventDefault()
+    let obj = {}
+    let idBook = document.getElementById('id').value
+    obj.name = document.getElementById('name').value
+    obj.author = document.getElementById('author').value
+    let id = parseInt(idBook)    
+    try {
+        const response = await fetch(`http://localhost:8080/api/v1/books/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(obj),
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        })
+        const json = await response.json();
+        console.log(json);
+        resetForm()
         window.location.reload()
     } catch (e) {
         console.error(e);
