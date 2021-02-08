@@ -7,9 +7,10 @@ import (
 // Book is a placeholder for book
 type Book struct {
 	// gorm by default take ID field as the table's PK
-	ID     int    `gorm:"AUTO_INCREMENT" form:"id" json:"id"`
-	Name   string `gorm:"not null" form:"name" json:"name"`
-	Author string `gorm:"not null" form:"author" json:"author"`
+	ID          int    `gorm:"AUTO_INCREMENT" form:"id" json:"id"`
+	Name        string `gorm:"not null" form:"name" json:"name"`
+	Author      string `gorm:"not null" form:"author" json:"author"`
+	Description string `form:"description" json:"description"`
 }
 
 // PostBook handle the creation of a book

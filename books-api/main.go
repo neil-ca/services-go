@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Neil-uli/Restful-go/sqlite/api"
+	"github.com/Neil-uli/Restful-go/books-api/api"
 	_ "github.com/mattn/go-sqlite3"
 )
 
