@@ -10,7 +10,7 @@ type Book struct {
 	ID          int    `gorm:"AUTO_INCREMENT" form:"id" json:"id"`
 	Name        string `gorm:"not null" form:"name" json:"name"`
 	Author      string `gorm:"not null" form:"author" json:"author"`
-	Description string `form:"description" json:"description"`
+	Description string `gorm:"not null" form:"description" json:"description"`
 }
 
 // PostBook handle the creation of a book
@@ -98,9 +98,10 @@ func UpdateBook(c *gin.Context) {
 			c.Bind(&newBook)
 
 			result := Book{
-				ID:     book.ID,
-				Name:   newBook.Name,
-				Author: newBook.Author,
+				ID:          book.ID,
+				Name:        newBook.Name,
+				Author:      newBook.Author,
+				Description: newBook.Description,
 			}
 			// UPDATE books SET name='newBook.name', author='newBook.author' WHERE id = book.ID;
 			db.Save(&result)

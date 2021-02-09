@@ -24,7 +24,9 @@ function generateTableHead(table, data) {
 }
 function generateTable(table, data) {
     for (let element of data) {
+        let id = "row"
         let row = table.insertRow()
+        row.id = id
         for (key in element) {
             let cell = row.insertCell()
             let text = document.createTextNode(element[key])
@@ -88,6 +90,7 @@ updateBook.addEventListener('click', async (e) => {
     let idBook = document.getElementById('id').value
     obj.name = document.getElementById('name').value
     obj.author = document.getElementById('author').value
+    obj.description = document.getElementById('description').value
     let id = parseInt(idBook)    
     try {
         const response = await fetch(`http://localhost:8080/api/v1/books/${id}`, {
