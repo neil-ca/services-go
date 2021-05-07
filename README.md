@@ -1,5 +1,4 @@
-# Restful-go why t
-## This repo is a collection of services written in go 
+## This repo is a collection of services written in go, various are in experimental
 ## One example inside of jsonstore 
 
 | Endpoint                 | Method  | Description |
@@ -37,3 +36,5 @@ curl -X GET http://localhost:8000/v1/user/1
 ```
 curl -X GET 'http://localhost:8000/v1/user?first_name=Christopher Marshal'
 ```
+
+TODO -> Implement and use tools for put in the cloud
