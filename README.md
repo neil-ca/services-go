@@ -37,4 +37,3 @@ curl -X GET http://localhost:8000/v1/user/1
 curl -X GET 'http://localhost:8000/v1/user?first_name=Christopher Marshal'
 ```
 
-TODO -> Implement and use tools for put in the cloud
